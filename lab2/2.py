@@ -3,5 +3,5 @@ b = 200
 
 if a > b:
     print("a is greater than b")
-else:
+else: 
     print("a is not greater than b")
