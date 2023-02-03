@@ -1,2 +1,4 @@
 thistuple = ("apple", "banana", "cherry")
-print(thistuple)
+print(thistuple[1])
+
+print(thistuple[-1])
