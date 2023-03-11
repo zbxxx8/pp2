@@ -1,4 +1,4 @@
 import re
 pattern="\w*[_]\w*"
-data="a_nurushev"
+data="hello"
 print(re.search(pattern,data))
