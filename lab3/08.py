@@ -4,4 +4,4 @@ def my_function(food):
 
 fruits = ["apple", "banana", "cherry"]
 
-my_function(fruits)
+my_function(fruits) 

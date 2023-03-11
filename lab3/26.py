@@ -11,3 +11,4 @@ p1 = Person("John", 36)
 del p1.age
 
 print(p1.age)
+ 

@@ -13,6 +13,6 @@ class Student(Person):
 
   def welcome(self):
     print("Welcome", self.firstname, self.lastname, "to the class of", self.graduationyear)
-
+ 
 x = Student("Mike", "Olsen", 2019)
 x.welcome()

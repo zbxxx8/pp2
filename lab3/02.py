@@ -3,4 +3,4 @@ def my_function(fname):
 
 my_function("Emil")
 my_function("Tobias")
-my_function("Linus")
+my_function("Linus") 

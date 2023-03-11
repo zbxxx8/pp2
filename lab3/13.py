@@ -1,2 +1,9 @@
-x = lambda a, b : a * b
-print(x(5, 6))
+class myclass:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+x = myclass("zhans", 19)
+
+print(x.name)
+print(x.age)

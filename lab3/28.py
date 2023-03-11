@@ -1,4 +1,4 @@
 class Person:
-  pass
+  pass 
 
-# having an empty class definition like this, would raise an error without the pass statement
+# having an empty class definition like this, would raise an error without the pass statement 
