@@ -12,6 +12,7 @@ RED = (255, 0, 0)
 LINE_COLOR = (50, 50, 50)
 HEIGHT = 400
 WIDTH = 400
+SPEED = 5
 
 BLOCK_SIZE = 20
 MAX_LEVEL = 4
@@ -28,6 +29,8 @@ wly = [range(0, 19)]
 font = pygame.font.SysFont("Verdana", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
+
+INC_SPEED = pygame.USEREVENT + 1
 
 class Point:
     def __init__(self, _x, _y):
@@ -85,7 +88,7 @@ class Food:
         for i in range(len(wallbody)):
             if self.location.x == wall_list_x[i]:
                 if self.location.y == wall_list_y[i]:
-                    Food.spawn()
+                    self.spawn()
 
 
 
@@ -183,6 +186,7 @@ def main():
             snake = Snake()
             snake.level = newLevel
             wall = Wall(snake.level)
+
             
             
        
