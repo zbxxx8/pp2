@@ -9,9 +9,6 @@ def main():
     while True:
         
         pressed = pygame.key.get_pressed()
-        
-        alt_held = pressed[pygame.K_LALT] or pressed[pygame.K_RALT]
-        ctrl_held = pressed[pygame.K_LCTRL] or pressed[pygame.K_RCTRL]
 
         for event in pygame.event.get():
             
@@ -19,10 +16,6 @@ def main():
             if event.type == pygame.QUIT:
                 return
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w and ctrl_held:
-                    return
-                if event.key == pygame.K_F4 and alt_held:
-                    return
                 if event.key == pygame.K_ESCAPE:
                     return
         
@@ -31,7 +24,7 @@ def main():
         mickeyr = mickey.get_rect(bottomright=(1150, 975))
         screen.blit(mickey, mickeyr)
  
-        pygame.display.update()
+        
 
 
         sec = pygame.image.load('sec2.png')  
@@ -39,6 +32,9 @@ def main():
         screen.blit(sec, secr)
         pygame.display.update()
 
+        secrot = pygame.transform.rotate(secr, 20)
+
+        pygame.display.update()
 #       angle = 15
 #       def blitRotateCenter(surf, image, topleft, angle):
 #
