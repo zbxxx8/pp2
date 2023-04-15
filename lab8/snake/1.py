@@ -42,33 +42,52 @@ class gameover:
         time.sleep(2)
         pygame.quit()
 
+wallbody = []
 
 class Wall:
     def __init__(self, level):
-        self.body = []
-        
+
         f = open("level{}.txt".format(level), "r")
 
         #lines = content.split('\n')
         #print(len(lines[0]))
-
+        wallbody.clear()
         wall_list_x.clear()
         wall_list_y.clear()
         
         for y in range(0, HEIGHT//BLOCK_SIZE + 1):
             for x in range(0, WIDTH//BLOCK_SIZE + 1):
                 if f.read(1) == '#':
-                    self.body.append(Point(x, y))
+                    wallbody.append(Point(x, y))
                     wall_list_x.append(x)
                     wall_list_y.append(y)
-                    wlx.pop(x)
-                    wly.pop(y)
+                    
 
     def draw(self):
-        for point in self.body:
+        for point in wallbody:
             rect = pygame.Rect(BLOCK_SIZE * point.x, BLOCK_SIZE * point.y, BLOCK_SIZE, BLOCK_SIZE)
             pygame.draw.rect(SCREEN, (226,135,67), rect)
         
+class Food:
+    def __init__(self):
+        self.location = Point(random.randint(0, 19), random.randint(0, 19))
+  
+    def draw(self):
+        point = self.location
+        rect = pygame.Rect(BLOCK_SIZE * point.x, BLOCK_SIZE * point.y, BLOCK_SIZE, BLOCK_SIZE)
+        pygame.draw.rect(SCREEN, (0, 0, 255), rect)
+
+    def spawn(self):
+        self.location = Point(random.randint(0, 19), random.randint(0, 19))
+        sf = self.location
+
+    def check(self):
+        for i in range(len(wallbody)):
+            if self.location.x == wall_list_x[i]:
+                if self.location.y == wall_list_y[i]:
+                    Food.spawn()
+
+
 
 class Snake:
     def __init__(self):
@@ -94,8 +113,7 @@ class Snake:
 
     def draw(self):
         point = self.body[0]
-        wlx.pop(point.x)
-        wly.pop(point.y)
+        
         rect = pygame.Rect(BLOCK_SIZE * point.x, BLOCK_SIZE * point.y, BLOCK_SIZE, BLOCK_SIZE)
         pygame.draw.rect(SCREEN, (255, 0, 0), rect)
 
@@ -113,7 +131,7 @@ class Snake:
                 
 
     def check_collision_wall(self, wall):
-        for i in range(len(wall.body)):
+        for i in range(len(wallbody)):
             if self.body[0].x == wall_list_x[i]:
                 if self.body[0].y == wall_list_y[i]:
                     DISPLAYSURF.fill(RED)
@@ -123,17 +141,6 @@ class Snake:
                     pygame.quit()
 
 
-class Food:
-    def __init__(self):
-        self.location = Point(random.choice(wlx), random.choice(wly))
-
-    def draw(self):
-        point = self.location
-        rect = pygame.Rect(BLOCK_SIZE * point.x, BLOCK_SIZE * point.y, BLOCK_SIZE, BLOCK_SIZE)
-        pygame.draw.rect(SCREEN, (0, 0, 255), rect)
-
-    def spawn(self):
-        self.location = Point(random.choice(wlx), random.choice(wly))
 
 def main():
     global SCREEN, CLOCK
@@ -168,6 +175,8 @@ def main():
         snake.move()
         snake.check_collision(food)
         snake.check_collision_wall(wall)
+        food.check()
+
 
         if len(snake.body) > 4:
             newLevel = (snake.level + 1) % MAX_LEVEL
